@@ -23,6 +23,9 @@ use App\Http\Controllers\TransfertsStockController;
 // Routes web.php
 use App\Http\Controllers\CaisseController;
 use App\Http\Controllers\VenteController;
+use App\Http\Controllers\StatistiqueController;
+
+Route::get('/statistiques', [StatistiqueController::class, 'index'])->name('statistiques.index');
 
 Route::patch('/ventes/{vente}/status', [VenteController::class, 'updateStatus'])->name('ventes.updateStatus');
 Route::get('/ventes/report', [VenteController::class, 'showReportForm'])->name('ventes.report.form');
@@ -178,5 +181,5 @@ Route::get('/utilaire', function () {
 })->name('until')->middleware('auth');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });

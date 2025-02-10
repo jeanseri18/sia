@@ -63,7 +63,7 @@ class AuthController extends Controller
                 return redirect()->route('select.bu');
             } elseif ($user->bus->count() == 1) {
                 session(['selected_bu' => $user->bus->first()->id]);
-                return redirect()->route('dashboard');
+                return redirect()->route('statistiques.index');
             }
         }
 
@@ -85,7 +85,7 @@ class AuthController extends Controller
         ]);
 
         session(['selected_bu' => $request->bu_id]);
-        return redirect()->route('dashboard');
+        return redirect()->route('statistiques.index');
     }
 
     // Déconnexion

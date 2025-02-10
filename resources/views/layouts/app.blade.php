@@ -50,6 +50,12 @@
         <nav class="mt-2">
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
+                    <a href="{{ route('statistiques.index') }}" class="nav-link" style="color:white">
+                        <i class="nav-icon bi bi-geo-alt-fill text-white"></i>
+                        <p>Tableau de bord</p>
+                    </a>
+                </li>
+            <li class="nav-item">
                     <a href="{{ route('bu.index') }}" class="nav-link" style="color:white">
                         <i class="nav-icon bi bi-geo-alt-fill text-white"></i>
                         <p>Business Units</p>
