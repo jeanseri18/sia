@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\BU;
-use App\Models\BuAssociat;
+use App\Models\BUAssociat;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -45,7 +45,7 @@ class UserController extends Controller
         // Assign selected buses
         if ($request->has('buses')) {
             foreach ($request->buses as $busId) {
-                BuAssociat::create([
+                BUAssociat::create([
                     'bu_id' => $busId,
                     'user_id' => $user->id,
                 ]);
@@ -82,11 +82,11 @@ class UserController extends Controller
         $user->save();
 
         // Update the buses assigned to the user
-        BuAssociat::where('user_id', $id)->delete(); // Remove old bus associations
+        BUAssociat::where('user_id', $id)->delete(); // Remove old bus associations
 
         if ($request->has('buses')) {
             foreach ($request->buses as $busId) {
-                BuAssociat::create([
+                BUAssociat::create([
                     'bu_id' => $busId,
                     'user_id' => $user->id,
                 ]);
@@ -103,7 +103,7 @@ class UserController extends Controller
         $user->delete();
 
         // Also delete bus associations
-        BuAssociat::where('user_id', $id)->delete();
+        BUAssociat::where('user_id', $id)->delete();
 
         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
