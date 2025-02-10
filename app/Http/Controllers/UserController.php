@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Bu;
+use App\Models\BU;
 use App\Models\BuAssociat;
 use Illuminate\Http\Request;
 
@@ -19,7 +19,7 @@ class UserController extends Controller
     // Show the form to create a new user
     public function create()
     {
-        $buses = Bu::all(); // Get all bus data to assign
+        $buses = BU::all(); // Get all bus data to assign
         return view('users.create', compact('buses'));
     }
 
