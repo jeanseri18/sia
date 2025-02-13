@@ -33,7 +33,7 @@ class ClientController extends Controller
     }
 
     public function store(Request $request) {
-        dd($request->all());
+     
 
         // Validation des champs
         $request->validate([

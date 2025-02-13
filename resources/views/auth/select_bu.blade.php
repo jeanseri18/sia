@@ -9,7 +9,7 @@
     <h2>Choisissez une BU</h2>
     <form method="POST" action="{{ route('select.bu.post') }}">
         @csrf
-        <select name="bu_id" required>
+        <select name="bu_id" class="form-control" required>
             @foreach($bus as $bu)
                 <option value="{{ $bu->id }}">{{ $bu->nom }}</option>
             @endforeach
