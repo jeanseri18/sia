@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@section('content')
+
 @include('sublayouts.projetdetail')
 <br>
     <div class="container">
@@ -21,7 +21,7 @@
                 <thead class="table-primary">
     
                 <tr>
-                    <th>Nom du produit</th>
+                    <th>Designation</th>
                     <th>Quantité</th>
                     <th>Actions</th>
                 </tr>
@@ -29,7 +29,7 @@
             <tbody>
                 @foreach($stocks as $stock)
                     <tr>
-                        <td>{{ $stock->nom_produit }}</td>
+                        <td>{{ $stock->article ? $stock->article->nom : 'Article introuvable' }}</td>
                         <td>{{ $stock->quantite }}</td>
                         <td>
                             <a href="{{ route('stock.edit', $stock->id) }}" class="btn btn-warning btn-sm">Modifier</a>
@@ -49,61 +49,6 @@
         </table>
 
 
-<!-- Modal -->
-<div class="modal fade" id="transfertModal" tabindex="-1" aria-labelledby="transfertModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="transfertModalLabel">Transférer du stock</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('transferts.store') }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label>Projet Source</label>
-                        <select name="id_projet_source" class="form-control" required>
-                            @foreach($projets as $projet)
-                                <option value="{{ $projet->id }}">{{ $projet->nom_projet }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label>Projet Destination</label>
-                        <select name="id_projet_destination" class="form-control" required>
-                            @foreach($projets as $projet)
-                                <option value="{{ $projet->id }}">{{ $projet->nom_projet }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-    <label>Article</label>
-    <select name="article_id" class="form-control" required>
-        @foreach($articles as $article)
-            <option value="{{ $article->id }}">{{ $article->nom }}</option>
-        @endforeach
-    </select>
-</div>
-
-
-                    <div class="mb-3">
-                        <label>Quantité</label>
-                        <input type="number" name="quantite" class="form-control" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label>Date de transfert</label>
-                        <input type="date" name="date_transfert" class="form-control" required>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Transférer</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 </div>
 </div>
 </div>
@@ -134,7 +79,7 @@
         border-color: #033765;
     }
 </style>
-@endsection
+
 
 
 @push('styles')

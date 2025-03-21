@@ -10,9 +10,9 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('id_artisan');
             $table->unsignedBigInteger('id_contrat');
-            $table->decimal('montant', 10, 2);
-            $table->decimal('taux_avancement', 5, 2)->default(0);
-            $table->enum('statut', ['en cours', 'terminée', 'annulée'])->default('en cours');
+            $table->string('prestation_titre')->nullable();
+            $table->string('detail')->nullable();
+            $table->enum('statut', ['en attente', 'en cours', 'terminée', 'annulée'])->default('en cours');
             $table->timestamps();
 
             $table->foreign('id_artisan')->references('id')->on('artisan')->onDelete('cascade');

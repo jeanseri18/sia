@@ -37,7 +37,7 @@
         </div>
         
         <div class="form-group">
-            <label>Nom</label>
+            <label>Designation</label>
             <input type="text" name="nom" class="form-control" value="{{ old('nom', $article->nom) }}">
         </div>
         

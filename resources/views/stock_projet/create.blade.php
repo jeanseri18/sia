@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@section('content')@include('sublayouts.projetdetail')
+@include('sublayouts.projetdetail')
 
     <div class="container">
         <h3>Ajouter un produit au stock</h3>
@@ -23,7 +23,7 @@
                 <label for="quantite">Quantité</label>
                 <input type="number" class="form-control" id="quantite" name="quantite" required>
             </div>
-
+            <br>
             <button type="submit" class="btn btn-primary">Ajouter</button>
         </form>
     </div>

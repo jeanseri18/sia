@@ -9,7 +9,7 @@ class Document extends Model {
     use HasFactory;
 
     protected $table = 'document';
-    protected $fillable = ['nom', 'type', 'chemin', 'id_projet', 'id_contrat', 'id_facture'];
+    protected $fillable = ['nom', 'chemin', 'id_projet', 'id_contrat', 'id_facture'];
 
     public function projet() {
         return $this->belongsTo(Projet::class, 'id_projet');

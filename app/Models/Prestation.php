@@ -9,7 +9,7 @@ class Prestation extends Model {
     use HasFactory;
 
     protected $table = 'prestation';
-    protected $fillable = ['id_artisan', 'id_contrat', 'montant', 'taux_avancement', 'statut'];
+    protected $fillable = ['id_artisan', 'id_contrat', 'prestation_titre', 'detail', 'statut'];
 
     public function artisan() {
         return $this->belongsTo(Artisan::class, 'id_artisan');

@@ -31,8 +31,12 @@
             </div>
             <div class="form-group">
                 <label for="type_travaux">Type de travaux</label>
-                <input type="text" class="form-control" id="type_travaux" name="type_travaux" required>
-            </div>
+                    <select name="type_travaux" id="type_travaux" class="form-select" required>
+                        <option value="">Sélectionner un type Travaux</option>
+                        @foreach ($typeTravaux as $type)
+                            <option value="{{ $type->nom }}">{{ $type->nom }}</option>
+                        @endforeach
+                    </select>            </div>
             <div class="form-group">
                 <label for="taux_garantie">Taux de garantie</label>
                 <input type="number" step="0.01" class="form-control" id="taux_garantie" name="taux_garantie" required>
@@ -43,7 +47,8 @@
                     <select name="client_id" id="client_id" class="form-select" required>
                         <option value="">Sélectionner un client</option>
                         @foreach ($clients as $client)
-                            <option value="{{ $client->id }}">{{ $client->prenoms }}</option>
+                            <option value="{{ $client->id }}">{{ $client->nom_raison_sociale && $client->prenoms ? $client->nom_raison_sociale . ' ' . $client->prenoms : ($client->nom_raison_sociale ?? $client->prenoms) }}
+                            </option>
                         @endforeach
                     </select>
                 </div>

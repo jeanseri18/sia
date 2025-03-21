@@ -2,4 +2,5 @@
 
 @section('content')
 @include('sublayouts.projetdetail')
+
 @endsection

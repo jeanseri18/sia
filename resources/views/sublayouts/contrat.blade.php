@@ -12,14 +12,15 @@
 
 <div class="liens-contrat">
     <a href="#">Détails</a>
+    <a href="#">BPU</a>
     <a href="#">DQE</a>
     <a href="#">Déboursé</a>
-    <a href="#">Stock</a>
+    <a href="{{ route('stock_contrat.index') }}">Stock</a>
     <a href="#">Frais de Chantier</a>
     <a href="#">Demande de Ravitaillement</a>
-    <a href="#">Facturation</a>
-    <a href="#">Document</a>
-    <a href="#">Artisan</a>
+    <a href="{{ route('factures.index') }}">Facturation</a>
+    <a href="{{ route('document_contrat.index') }}">Document</a>
+    <a href="{{ route('prestations.index') }}">Artisan</a>
 </div>
 <style>
     .liens-contrat {

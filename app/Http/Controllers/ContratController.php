@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Contrat;
 use App\Models\Projet;
+use App\Models\Article;
 use App\Models\ClientFournisseur;
+use App\Models\TypeTravaux;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class ContratsController extends Controller
+class ContratController extends Controller
 {
     // Afficher le formulaire de création d'un contrat
     public function create()
@@ -27,7 +29,10 @@ class ContratsController extends Controller
                                             ->where('id_bu', $id_bu)  // Filtrage selon l'ID du bus
                                             ->get();
         $projet_id = session('projet_id');
-        return view('contrats.create', compact('projet_id','clients'));
+        $projets = Projet::all();
+        $articles = Article::all();
+        $typeTravaux=TypeTravaux::all();
+        return view('contrats.create', compact('projet_id','clients','projets','articles','typeTravaux'));
     }
 
     // Enregistrer un nouveau contrat
@@ -70,19 +75,35 @@ class ContratsController extends Controller
     {
         $projet_id = session('projet_id');
         $contrats = Contrat::where('id_projet', $projet_id)->get();
-        return view('contrats.index', compact('contrats'));
+        $projets = Projet::all();
+        $articles = Article::all();
+        return view('contrats.index', compact('contrats','projets','articles'));
     }
 
     // Afficher le formulaire d'édition d'un contrat
     public function edit($id)
     {
+        $id_bu = session('selected_bu');
+
+        if (!$id_bu) {
+            return redirect()->route('select.bu')->withErrors(['error' => 'Veuillez sélectionner un bus avant d\'accéder à cette page.']);
+        }
+    
+        // Récupérer les clients associés à l'ID du bus
+        $clients = ClientFournisseur::where('type', 'client')
+                                    ->where('id_bu', $id_bu)  // Filtrage selon l'ID du bus
+                                    ->get();
         $contrat = Contrat::findOrFail($id);
-        return view('contrats.edit', compact('contrat'));
+        $projets = Projet::all();
+        $articles = Article::all();
+        $typeTravaux=TypeTravaux::all();
+        return view('contrats.edit', compact('contrat','clients','projets','articles','typeTravaux'));
     }
 
     // Mettre à jour un contrat
     public function update(Request $request, $id)
-    {
+    {              
+
         $request->validate([
             'ref_contrat' => 'required',
             'nom_contrat' => 'required',
@@ -90,11 +111,12 @@ class ContratsController extends Controller
             'date_fin' => 'nullable|date',
             'type_travaux' => 'required',
             'taux_garantie' => 'required|numeric',
-            'client_id' => 'required|exists:users,id',
+            'client_id' => 'required',
             'montant' => 'required|numeric',
             'statut' => 'required|in:en cours,terminé,annulé',
         ]);
-
+                // Récupérer les clients associés à l'ID du bus
+  
         $contrat = Contrat::findOrFail($id);
         $contrat->update($request->all());
 
@@ -115,8 +137,17 @@ public function show($id)
     {  
         $contrat = Contrat::findOrFail($id);
         session(['contrat_id' => $contrat->id,'contrat_nom'=>$contrat->nom_contrat,'ref_contrat'=>$contrat->ref_contrat]);
+        $id_bu = session('selected_bu');
 
-    return view('contrats.show', compact('contrat'));
+        if (!$id_bu) {
+            return redirect()->route('select.bu')->withErrors(['error' => 'Veuillez sélectionner un bus avant d\'accéder à cette page.']);
+        }
+    
+        // Récupérer les clients associés à l'ID du bus
+        $clients = ClientFournisseur::where('type', 'client')
+                                    ->where('id_bu', $id_bu)  // Filtrage selon l'ID du bus
+                                    ->get();
+    return view('contrats.show', compact('contrat','clients'));
 }
 
 }

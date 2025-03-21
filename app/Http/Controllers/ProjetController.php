@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Projet;
+use App\Models\Article;
 use App\Models\BU;
 use App\Models\SecteurActivite;
 use App\Models\ClientFournisseur;
@@ -65,7 +66,9 @@ class ProjetController extends Controller
             'projet_id' => $projet->id,
             'projet_nom' => $projet->nom_projet
         ]);
-        return view('projets.show', compact('projet'));
+        $projets = Projet::all();
+        $articles = Article::all();
+        return view('projets.show', compact('projet','projets','articles'));
     }
 
     public function edit(Projet $projet)

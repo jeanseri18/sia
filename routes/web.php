@@ -16,7 +16,7 @@ use App\Http\Controllers\ArtisanController;
 use App\Http\Controllers\CorpsMetierController;
 use App\Http\Controllers\ConfigGlobalController;
 
-use App\Http\Controllers\ContratsController;
+use App\Http\Controllers\ContratController;
 use App\Http\Controllers\StockProjetController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TransfertsStockController;
@@ -24,6 +24,76 @@ use App\Http\Controllers\TransfertsStockController;
 use App\Http\Controllers\CaisseController;
 use App\Http\Controllers\VenteController;
 use App\Http\Controllers\StatistiqueController;
+use App\Http\Controllers\PaysController;
+use App\Http\Controllers\VilleController;
+use App\Http\Controllers\SecteurController;
+use App\Http\Controllers\RegimeImpositionController;
+use App\Http\Controllers\UniteMesureController;
+use App\Http\Controllers\TypeTravauxController;
+use App\Http\Controllers\ReferenceController;
+use App\Http\Controllers\BanqueController;
+use App\Http\Controllers\MonnaieController;
+use App\Http\Controllers\ModeDePaiementController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\PrestationController;
+use App\Http\Controllers\FactureController;
+
+Route::resource('prestations', PrestationController::class);
+Route::resource('factures', FactureController::class);
+
+Route::resource('documents', DocumentController::class)->except(['edit', 'update']);
+Route::get('/documents_contrat', [DocumentController::class, 'index_contrat'])->name('document_contrat.index');
+
+Route::resource('references', ReferenceController::class);
+Route::resource('banques', BanqueController::class);
+
+// Routes pour les Monnaies
+Route::resource('monnaies', MonnaieController::class);
+
+// Routes pour les Modes de Paiement
+Route::resource('modes_de_paiement', ModeDePaiementController::class);
+
+Route::get('/pays', [PaysController::class, 'index'])->name('pays.index');
+Route::get('/pays/create', [PaysController::class, 'create'])->name('pays.create');
+Route::post('/pays', [PaysController::class, 'store'])->name('pays.store');
+Route::get('/pays/{id}/edit', [PaysController::class, 'edit'])->name('pays.edit');
+Route::put('/pays/{id}', [PaysController::class, 'update'])->name('pays.update');
+Route::delete('/pays/{id}', [PaysController::class, 'destroy'])->name('pays.destroy');
+
+Route::get('/villes', [VilleController::class, 'index'])->name('villes.index');
+Route::get('/villes/create', [VilleController::class, 'create'])->name('villes.create');
+Route::post('/villes', [VilleController::class, 'store'])->name('villes.store');
+Route::get('/villes/{id}/edit', [VilleController::class, 'edit'])->name('villes.edit');
+Route::put('/villes/{id}', [VilleController::class, 'update'])->name('villes.update');
+Route::delete('/villes/{id}', [VilleController::class, 'destroy'])->name('villes.destroy');
+
+Route::get('/secteurs', [SecteurController::class, 'index'])->name('secteurs.index');
+Route::get('/secteurs/create', [SecteurController::class, 'create'])->name('secteurs.create');
+Route::post('/secteurs', [SecteurController::class, 'store'])->name('secteurs.store');
+Route::get('/secteurs/{id}/edit', [SecteurController::class, 'edit'])->name('secteurs.edit');
+Route::put('/secteurs/{id}', [SecteurController::class, 'update'])->name('secteurs.update');
+Route::delete('/secteurs/{id}', [SecteurController::class, 'destroy'])->name('secteurs.destroy');
+
+Route::get('/regime-impositions', [RegimeImpositionController::class, 'index'])->name('regime-impositions.index');
+Route::get('/regime-impositions/create', [RegimeImpositionController::class, 'create'])->name('regime-impositions.create');
+Route::post('/regime-impositions', [RegimeImpositionController::class, 'store'])->name('regime-impositions.store');
+Route::get('/regime-impositions/{id}/edit', [RegimeImpositionController::class, 'edit'])->name('regime-impositions.edit');
+Route::put('/regime-impositions/{id}', [RegimeImpositionController::class, 'update'])->name('regime-impositions.update');
+Route::delete('/regime-impositions/{id}', [RegimeImpositionController::class, 'destroy'])->name('regime-impositions.destroy');
+
+Route::get('/unite-mesures', [UniteMesureController::class, 'index'])->name('unite-mesures.index');
+Route::get('/unite-mesures/create', [UniteMesureController::class, 'create'])->name('unite-mesures.create');
+Route::post('/unite-mesures', [UniteMesureController::class, 'store'])->name('unite-mesures.store');
+Route::get('/unite-mesures/{id}/edit', [UniteMesureController::class, 'edit'])->name('unite-mesures.edit');
+Route::put('/unite-mesures/{id}', [UniteMesureController::class, 'update'])->name('unite-mesures.update');
+Route::delete('/unite-mesures/{id}', [UniteMesureController::class, 'destroy'])->name('unite-mesures.destroy');
+
+Route::get('/type-travaux', [TypeTravauxController::class, 'index'])->name('type-travaux.index');
+Route::get('/type-travaux/create', [TypeTravauxController::class, 'create'])->name('type-travaux.create');
+Route::post('/type-travaux', [TypeTravauxController::class, 'store'])->name('type-travaux.store');
+Route::get('/type-travaux/{id}/edit', [TypeTravauxController::class, 'edit'])->name('type-travaux.edit');
+Route::put('/type-travaux/{id}', [TypeTravauxController::class, 'update'])->name('type-travaux.update');
+Route::delete('/type-travaux/{id}', [TypeTravauxController::class, 'destroy'])->name('type-travaux.destroy');
 
 Route::get('/statistiques', [StatistiqueController::class, 'index'])->name('statistiques.index');
 
@@ -68,16 +138,24 @@ Route::prefix('stock')->group(function() {
     Route::put('/{id}', [StockProjetController::class, 'update'])->name('stock.update');
     Route::delete('/{id}', [StockProjetController::class, 'destroy'])->name('stock.destroy');
 });
+Route::prefix('stock_contrat')->group(function() {
+    Route::get('/', [StockProjetController::class, 'index_contrat'])->name('stock_contrat.index');
+    Route::get('/create', [StockProjetController::class, 'create_contrat'])->name('stock_contrat.create');
+    Route::post('/', [StockProjetController::class, 'store_contrat'])->name('stock_contrat.store');
+    Route::get('/{id}/edit', [StockProjetController::class, 'edit_contrat'])->name('stock_contrat.edit');
+    Route::put('/{id}', [StockProjetController::class, 'update_contrat'])->name('stock_contrat.update');
+    Route::delete('/{id}', [StockProjetController::class, 'destroy_contrat'])->name('stock_contrat.destroy');
+});
 
 Route::prefix('contrats')->group(function() {
-    Route::get('/', [ContratsController::class, 'index'])->name('contrats.index');
-    Route::get('create', [ContratsController::class, 'create'])->name('contrats.create');
-    Route::post('store', [ContratsController::class, 'store'])->name('contrats.store');
-    Route::get('edit/{id}', [ContratsController::class, 'edit'])->name('contrats.edit');
-    Route::put('update/{id}', [ContratsController::class, 'update'])->name('contrats.update');
-    Route::delete('destroy/{id}', [ContratsController::class, 'destroy'])->name('contrats.destroy');
+    Route::get('/', [ContratController::class, 'index'])->name('contrats.index');
+    Route::get('create', [ContratController::class, 'create'])->name('contrats.create');
+    Route::post('store', [ContratController::class, 'store'])->name('contrats.store');
+    Route::get('edit/{id}', [ContratController::class, 'edit'])->name('contrats.edit');
+    Route::put('update/{id}', [ContratController::class, 'update'])->name('contrats.update');
+    Route::delete('destroy/{id}', [ContratController::class, 'destroy'])->name('contrats.destroy');
 });
-Route::get('/contrats/{id}', [ContratsController::class, 'show'])->name('contrats.show');
+Route::get('/contrats/{id}', [ContratController::class, 'show'])->name('contrats.show');
 
 Route::get('/config-global', [ConfigGlobalController::class, 'index'])->name('config-global.index');
 Route::get('/config-global/create', [ConfigGlobalController::class, 'create'])->name('config-global.create');

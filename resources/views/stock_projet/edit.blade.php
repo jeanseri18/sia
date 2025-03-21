@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@section('content')@include('sublayouts.projetdetail')
+@include('sublayouts.projetdetail')
 
     <div class="container">
         <h2>Modifier le produit : {{ $stock->article->nom }}</h2>

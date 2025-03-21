@@ -14,7 +14,7 @@
     
             <tr>
                 <th>Référence</th>
-                <th>Nom</th>
+                <th>Designation</th>
                 <th>Quantité</th>
                 <th>Prix Unitaire</th>
                 <th>Actions</th>

@@ -37,7 +37,7 @@
             <input type="text" name="reference" class="form-control">
         </div>
         <div class="form-group">
-            <label>Nom</label>
+            <label>Designation</label>
             <input type="text" name="nom" class="form-control">
         </div>
         <div class="form-group">
