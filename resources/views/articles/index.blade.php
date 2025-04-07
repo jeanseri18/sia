@@ -17,6 +17,7 @@
                 <th>Designation</th>
                 <th>Quantité</th>
                 <th>Prix Unitaire</th>
+                <th>Unité de mesure</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,6 +28,7 @@
                     <td>{{ $article->nom }}</td>
                     <td>{{ $article->quantite_stock }}</td>
                     <td>{{ $article->prix_unitaire }} CFA</td>
+                    <td>{{ $article->unite_mesure }} CFA</td>
                     <td>
                         <a href="{{ route('articles.show', $article) }}" class="btn btn-info">Voir</a>
                         <a href="{{ route('articles.edit', $article) }}" class="btn btn-warning">Modifier</a>

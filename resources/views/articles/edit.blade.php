@@ -21,19 +21,20 @@
         </div>
         
         <div class="form-group">
-            <label>Sous-catégorie</label>
-            <select name="sous_categorie_id" class="form-control">
-                <option value="">Aucune</option>
-                @foreach ($sousCategories as $sousCategorie)
-                    <option value="{{ $sousCategorie->id }}" {{ $article->sous_categorie_id == $sousCategorie->id ? 'selected' : '' }}>
-                        {{ $sousCategorie->nom }}
+            <label>Unité de mesure</label>
+            <select name="unite_mesure" class="form-control">
+                <option value="">Sélectionner une unité</option>
+                @foreach ($uniteMesures as $uniteMesure)
+                    <option value="{{ $uniteMesure->id }}" {{ $article->unite_mesure == $uniteMesure->id ? 'selected' : '' }}>
+                        {{ $uniteMesure->nom }}
                     </option>
                 @endforeach
             </select>
         </div>
+        
         <div class="form-group">
             <label>Référence</label>
-            <input type="text" name="reference" class="form-control" value="{{ old('reference', $article->reference) }}">
+            <input type="text" name="reference" class="form-control" value="{{ old('reference', $article->reference) }}" readonly>
         </div>
         
         <div class="form-group">
@@ -43,12 +44,12 @@
         
         <div class="form-group">
             <label>Quantité Stock</label>
-            <input type="number" name="quantite_stock" class="form-control" value="{{ old('quantite_stock', $article->quantite_stock) }}">
+            <input type="number" name="quantite_stock" class="form-control" value="{{ old('quantite_stock', $article->quantite_stock) }}" readonly>
         </div>
         
         <div class="form-group">
             <label>Prix Unitaire</label>
-            <input type="number" name="prix_unitaire" class="form-control" value="{{ old('prix_unitaire', $article->prix_unitaire) }}">
+            <input type="number" name="prix_unitaire" class="form-control" value="{{ old('prix_unitaire', $article->prix_unitaire) }}" readonly>
         </div>
         
         <div class="form-group">
@@ -56,10 +57,7 @@
             <input type="text" name="unite_mesure" class="form-control" value="{{ old('unite_mesure', $article->unite_mesure) }}">
         </div>
         
-        <div class="form-group">
-            <label>Coût Moyen Pondéré</label>
-            <input type="number" name="cout_moyen_pondere" class="form-control" value="{{ old('cout_moyen_pondere', $article->cout_moyen_pondere) }}">
-        </div>
+       
         
 
         <button type="submit" class="btn btn-success mt-3">Mettre à jour</button>

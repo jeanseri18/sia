@@ -105,7 +105,6 @@ class ContratController extends Controller
     {              
 
         $request->validate([
-            'ref_contrat' => 'required',
             'nom_contrat' => 'required',
             'date_debut' => 'required|date',
             'date_fin' => 'nullable|date',
@@ -115,8 +114,18 @@ class ContratController extends Controller
             'montant' => 'required|numeric',
             'statut' => 'required|in:en cours,terminé,annulé',
         ]);
-                // Récupérer les clients associés à l'ID du bus
-  
+        $lastReference = \App\Models\Reference::where('nom', 'Code contrat')
+        ->latest('created_at')
+        ->first();
+
+// Générer la nouvelle référence en prenant la dernière partie de la référence + la date actuelle
+$newReference = $lastReference ? $lastReference->ref : 'Ctr_000';  // Si aucune référence, utiliser un modèle
+$newReference = 'Ctr_' . now()->format('YmdHis'); // Utiliser un underscore et ajouter la date/heure
+
+// Ajouter la référence générée à la requête
+$request->merge([
+'ref_contrat' => $newReference,
+]);  
         $contrat = Contrat::findOrFail($id);
         $contrat->update($request->all());
 

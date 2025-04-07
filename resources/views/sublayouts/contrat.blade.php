@@ -1,4 +1,4 @@
-<div class="card text-white container" style="background:#033765;padding: 20px;">
+<div class="card text-white " style="background:#033765;padding: 20px;">
 
 
     <font style="font-size :50px; color:white;">Contrat |  {{ session('contrat_nom') }}|{{ session('ref_contrat') }}</font>
@@ -12,7 +12,7 @@
 
 <div class="liens-contrat">
     <a href="#">Détails</a>
-    <a href="#">BPU</a>
+    <a href="{{ route('bpu.contrat') }}">BPU</a>
     <a href="#">DQE</a>
     <a href="#">Déboursé</a>
     <a href="{{ route('stock_contrat.index') }}">Stock</a>

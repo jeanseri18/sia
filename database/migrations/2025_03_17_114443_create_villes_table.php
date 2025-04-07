@@ -10,6 +10,8 @@ return new class extends Migration {
             $table->id();
             $table->string('nom');
             $table->foreignId('pays_id')->constrained('pays')->onDelete('cascade');
+            $table->string('coef_eloignement')->nullable();
+
             $table->timestamps();
         });
     }

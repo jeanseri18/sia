@@ -22,11 +22,11 @@ class CreateBpusTable extends Migration
             $table->decimal('marge_nette', 10, 2); // Marge nette
             $table->decimal('pu_ht', 10, 2); // Prix unitaire hors taxe
             $table->decimal('pu_ttc', 10, 2); // Prix unitaire toutes taxes comprises
-            $table->unsignedBigInteger('id_rubrique'); // Clé étrangère vers rubriques
+            $table->unsignedBigInteger('id_rubrique'); // Clé étrangère vers souscategorierubriquess
             $table->timestamps();
 
             // Définition de la clé étrangère
-            $table->foreign('id_rubrique')->references('id')->on('rubriques')->onDelete('cascade');
+            $table->foreign('id_souscategorie')->references('id')->on('souscategorierubriques')->onDelete('cascade');
         });
     }
 

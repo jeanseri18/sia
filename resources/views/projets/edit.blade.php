@@ -9,11 +9,7 @@
         @csrf
         @method('PUT')
 
-        <div class="mb-3">
-            <label for="ref_projet" class="form-label">Référence Projet</label>
-            <input type="text" id="ref_projet" name="ref_projet" value="{{ $projet->ref_projet }}" class="form-control" required>
-        </div>
-
+   
         <div class="mb-3">
             <label for="date_creation" class="form-label">Date de création</label>
             <input type="date" id="date_creation" name="date_creation" value="{{ $projet->date_creation }}" class="form-control" required>

@@ -14,10 +14,7 @@
 
     <form action="{{ route('projets.store') }}" method="POST">
         @csrf
-        <div class="mb-3">
-            <label for="ref_projet" class="form-label">Référence Projet</label>
-            <input type="text" id="ref_projet" name="ref_projet" class="form-control" required>
-        </div>
+     
 
         <div class="mb-3">
             <label for="date_creation" class="form-label">Date de création</label>

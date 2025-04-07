@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('reference')->unique();
             $table->string('nom');
-            $table->integer('quantite_stock');
-            $table->decimal('prix_unitaire', 10, 2);
+            $table->integer('quantite_stock')->default(0);
+            $table->decimal('prix_unitaire', 10, 2)->nullable();
             $table->string('unite_mesure');
             $table->decimal('cout_moyen_pondere', 10, 2)->nullable();
             $table->foreignId('categorie_id')->constrained('categories')->onDelete('cascade');

@@ -42,7 +42,6 @@ class ProjetController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'ref_projet' => 'required|unique:projets',
             'date_creation' => 'required|date',
             'nom_projet' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -55,7 +54,18 @@ class ProjetController extends Controller
             'statut' => 'required|in:en cours,terminé,annulé',
             'bu_id' => 'required|exists:bus,id'
         ]);
+        $lastReference = \App\Models\Reference::where('nom', 'Code Projet')
+        ->latest('created_at')
+        ->first();
 
+// Générer la nouvelle référence en prenant la dernière partie de la référence + la date actuelle
+$newReference = $lastReference ? $lastReference->ref : 'Prj_0000';  // Si aucune référence, utiliser un modèle
+$newReference = 'Prj_' . now()->format('YmdHis'); // Utiliser un underscore et ajouter la date/heure
+
+// Ajouter la référence générée à la requête
+$request->merge([
+'ref_projet' => $newReference,
+]);
         Projet::create($request->all());
         return redirect()->route('projets.index')->with('success', 'Projet créé avec succès.');
     }
@@ -87,7 +97,6 @@ class ProjetController extends Controller
     public function update(Request $request, Projet $projet)
     {
         $request->validate([
-            'ref_projet' => 'required|unique:projets,ref_projet,' . $projet->id,
             'date_creation' => 'required|date',
             'nom_projet' => 'required|string|max:255',
             'description' => 'nullable|string',

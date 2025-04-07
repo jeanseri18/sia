@@ -23,7 +23,7 @@ class SecteurController extends Controller
     {
         $request->validate([
             'nom' => 'required|string|max:255',
-            'id_ville' => 'required|exists:villes,id'
+            'ville_id' => 'required'
         ]);
 
         Secteur::create($request->all());
@@ -41,7 +41,7 @@ class SecteurController extends Controller
     {
         $request->validate([
             'nom' => 'required|string|max:255',
-            'id_ville' => 'required|exists:villes,id'
+            'ville_id' => 'required'
         ]);
 
         $secteur = Secteur::findOrFail($id);

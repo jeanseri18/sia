@@ -26,6 +26,15 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label class="form-label">Coefficient eloignement</label>
+            <input type="text" name="coef_eloignement" class="form-control @error('coef_eloignement') is-invalid @enderror" value="{{ old('coef_eloignement') }}" required>
+            @error('coef_eloignement')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        
+
+        <div class="mb-3">
             <label class="form-label">Pays</label>
             <select name="pays_id" class="form-control @error('pays_id') is-invalid @enderror" required>
                 <option value="">Sélectionner un Pays</option>

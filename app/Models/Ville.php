@@ -8,7 +8,7 @@ class Ville extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'pays_id'];
+    protected $fillable = ['nom', 'pays_id','coef_eloignement'];
 
     public function pays()
     {

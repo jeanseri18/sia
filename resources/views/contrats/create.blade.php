@@ -13,10 +13,7 @@
         <h2>Créer un nouveau contrat</h2>
         <form action="{{ route('contrats.store') }}" method="POST">
             @csrf
-            <div class="form-group">
-                <label for="ref_contrat">Référence du contrat</label>
-                <input type="text" class="form-control" id="ref_contrat" name="ref_contrat" required>
-            </div>
+       
             <div class="form-group">
                 <label for="nom_contrat">Nom du contrat</label>
                 <input type="text" class="form-control" id="nom_contrat" name="nom_contrat" required>

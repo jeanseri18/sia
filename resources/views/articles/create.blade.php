@@ -32,30 +32,23 @@
             </select>
         </div>
         
-        <div class="form-group">
-            <label>Référence</label>
-            <input type="text" name="reference" class="form-control">
-        </div>
+
         <div class="form-group">
             <label>Designation</label>
             <input type="text" name="nom" class="form-control">
         </div>
-        <div class="form-group">
-            <label>Quantité Stock</label>
-            <input type="number" name="quantite_stock" class="form-control">
-        </div>
-        <div class="form-group">
-            <label>Prix Unitaire</label>
-            <input type="number" name="prix_unitaire" class="form-control">
-        </div>
+    
+     
         <div class="form-group">
             <label>Unité de mesure</label>
-            <input type="text" name="unite_mesure" class="form-control">
+            <select name="unite_mesure" class="form-control">
+                <option value="">Sélectionner une unité</option>
+                @foreach ($uniteMesures as $uniteMesure)
+                    <option value="{{ $uniteMesure->id }}">{{ $uniteMesure->nom }}</option>
+                @endforeach
+            </select>
         </div>
-        <div class="form-group">
-            <label>Coût Moyen Pondéré</label>
-            <input type="number" name="cout_moyen_pondere" class="form-control">
-        </div>
+ 
         <button type="submit" class="btn btn-success mt-3">Ajouter</button>
     </form>
 </div>

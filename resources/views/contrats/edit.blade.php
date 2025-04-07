@@ -21,10 +21,7 @@
         @method('PUT')
 
         <!-- Référence du contrat -->
-        <div class="form-group">
-            <label for="ref_contrat">Référence du contrat</label>
-            <input type="text" class="form-control" id="ref_contrat" name="ref_contrat" value="{{ old('ref_contrat', $contrat->ref_contrat) }}" required>
-        </div>
+  
 
         <!-- Nom du contrat -->
         <div class="form-group">

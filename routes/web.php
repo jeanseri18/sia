@@ -37,6 +37,23 @@ use App\Http\Controllers\ModeDePaiementController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\PrestationController;
 use App\Http\Controllers\FactureController;
+use App\Http\Controllers\BpuController;
+use App\Http\Controllers\CategorieBpuController;
+use App\Http\Controllers\SousCategorieBpuController;
+use App\Http\Controllers\RubriqueController;
+
+Route::resource('categoriesbpu', CategorieBpuController::class);
+Route::resource('souscategoriesbpu', SousCategorieBpuController::class);
+Route::post('/rubriques', [RubriqueController::class, 'store'])->name('rubriques.store');
+Route::put('/rubriques/{id}', [RubriqueController::class, 'update'])->name('rubriques.update');
+Route::delete('/rubriques/{id}', [RubriqueController::class, 'destroy'])->name('rubriques.destroy');
+
+
+Route::resource('bpus', BpuController::class);
+
+Route::get('/bup-contrat', [BpuController::class, 'index_contrat'])->name('bpu.contrat');
+Route::get('/bup-print', [BpuController::class, 'print'])->name('bpu.print');
+Route::get('/bupn-general', [BpuController::class, 'index'])->name('bpu.index');
 
 Route::resource('prestations', PrestationController::class);
 Route::resource('factures', FactureController::class);

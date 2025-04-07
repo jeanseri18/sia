@@ -12,7 +12,7 @@ class CreateCategorierubriquesTable extends Migration
         Schema::create('categorierubriques', function (Blueprint $table) {
             $table->id();
             $table->string('nom'); // Nom de la session
-            $table->enum('type', ['texte', 'numérique']); // Type de la session
+            $table->string('type'); // Type de la session
             $table->timestamps();
         });
     }

@@ -30,6 +30,7 @@ $links = [
     ['route' => 'references.index', 'icon' => 'bi-bookmark-check-fill', 'text' => 'Références'],
     ['route' => 'monnaies.index', 'icon' => 'bi-currency-exchange', 'text' => 'Monnaie'],
     ['route' => 'modes_de_paiement.index', 'icon' => 'bi-credit-card-2-front-fill', 'text' => 'Mode de paiement'],
+    ['route' => 'bpu.index', 'icon' => 'bi-credit-card-2-front-fill', 'text' => 'Bordereau de prix unitaire'],
 ];
 @endphp
 

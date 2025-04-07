@@ -12,7 +12,7 @@ class CreateRubriquesTable extends Migration
             $table->id();
             $table->string('nom'); // Nom de la rubrique
             $table->unsignedBigInteger('id_soussession'); // Clé étrangère vers sous_sessions
-            $table->enum('type', ['texte', 'numérique']); // Type de la rubrique
+            $table->enum('type'); // Type de la rubrique
             $table->timestamps();
 
             // Définition de la clé étrangère

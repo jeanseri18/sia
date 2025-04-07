@@ -12,7 +12,7 @@ class CreateSousCategorierubriquesTable extends Migration
             $table->id();
             $table->string('nom'); // Nom de la sous-session
             $table->unsignedBigInteger('id_session'); // Clé étrangère vers sessions
-            $table->enum('type', ['texte', 'numérique']); // Type de la sous-session
+            $table->string('type'); // Type de la sous-session
             $table->timestamps();
 
             // Définition de la clé étrangère
