@@ -21,6 +21,7 @@
     <h2 class="mb-4">Bordereaux de prix unitaires</h2>
     <button class="btn btn-secondary mb-2" onclick="toggleForm('formCategorie')">Ajouter Catégorie</button>
     <a href="{{ route('bpu.print') }}" class="btn btn-secondary mb-2" target="blank">Afficher le BPU complet</a>
+    <a href="{{ route('import.index') }}" class="btn btn-secondary mb-2" >Importer un fichier excel</a>
 
     <!-- Formulaire d'ajout de catégorie -->
     <form  id="formCategorie" action="{{ route('categoriesbpu.store') }}" method="POST" style="display: none;">
@@ -37,7 +38,7 @@
     @foreach ($categories as $categorie)
         <table width="100%" class="text-center mt-4" border="1" bordercolor="black">
             <tr bgcolor="#5EB3F6" height="40px">
-                <td colspan="12">
+                <td colspan="11">
                     <div class="row">
                     <div class="col-md-8">
                     <h4 class="text-start text-uppercase">{{ $categorie->nom }}</h4> </div>
@@ -54,7 +55,7 @@
 
             <!-- Formulaire d'ajout de sous-catégorie -->
             <tr>
-                <td colspan="12">
+                <td colspan="11">
                     <form action="{{ route('souscategoriesbpu.store') }}" method="POST">
                         @csrf
                         <div class="row">
@@ -70,7 +71,7 @@
 
             @foreach ($categorie->sousCategories as $sousCategorie)
                 <tr bgcolor="#1F384C" class="text-white" height="40px">
-                    <td colspan="12">
+                    <td colspan="11">
                     <div class="row">
                     <div class="col-md-8">
                         <h5 class="text-start text-uppercase">{{ $sousCategorie->nom }}</h5> </div>
@@ -92,7 +93,6 @@
                     <tr>
                         <td>Designation</td>
                         <td>Quantité</td>
-                        <td>Designation</td>
                         <td>Materiaux</td>
                         <td>Unité</td>
                         <td>Main d'oeuvre</td>
@@ -109,7 +109,6 @@
                         <tr>
                             <td>{{ $bpu->designation }}</td>
                             <td>{{ $bpu->qte }}</td>
-                            <td>{{ $bpu->designation }}</td>
                             <td>{{ $bpu->materiaux }}</td>
                             <td>{{ $bpu->unite }}</td>
                             <td>{{ $bpu->main_oeuvre }}</td>
@@ -127,8 +126,9 @@
                         </tr>
 
                              
-<tr>
-<td colspan="12">
+                    @endforeach
+                    <tr>
+<td colspan="11">
 @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
@@ -182,7 +182,7 @@
     </div>
 </form>
 </td></tr>
-                    @endforeach
+
                 @endforeach
             @endforeach
         </table>

@@ -41,6 +41,10 @@ use App\Http\Controllers\BpuController;
 use App\Http\Controllers\CategorieBpuController;
 use App\Http\Controllers\SousCategorieBpuController;
 use App\Http\Controllers\RubriqueController;
+use App\Http\Controllers\ImportController;
+
+Route::get('/import_index', [ImportController::class, 'index'])->name('import.index');
+Route::post('/import', [ImportController::class, 'import'])->name('import.create');
 
 Route::resource('categoriesbpu', CategorieBpuController::class);
 Route::resource('souscategoriesbpu', SousCategorieBpuController::class);

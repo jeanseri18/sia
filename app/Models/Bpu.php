@@ -11,7 +11,7 @@ class Bpu extends Model
 protected $table = 'bpus';
     protected $fillable = [
         'designation', 'qte', 'materiaux', 'unite', 'main_oeuvre', 'materiel', 
-        'debourse_sec', 'frais_chantier', 'frais_general', 'marge_nette', 'pu_ht', 'pu_ttc', 'id_rubrique'
+        'debourse_sec', 'frais_chantier', 'frais_general', 'marge_nette', 'pu_ht', 'pu_ttc', 'id_souscategorie'
     ];
 
     public function sousCategorie()
